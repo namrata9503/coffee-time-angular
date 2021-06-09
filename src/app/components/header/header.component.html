@@ -1,0 +1,56 @@
+<header>
+    <app-navbar></app-navbar>
+    <ng-container *ngIf="coffee$ | async as coffee">
+        <div class="-mt-36 lg:-mt-36 md:-mt-36 sm:-mt-36 xs:-mt-16 bg-header-background bg-cover bg-no-repeat bg-top min-h-screen">
+            <div class="flex justify-center items-center">
+                <!--- model button and modal-->
+                <button id="price" class="font-mono absolute bottom-0  px-20 lg:px-24 md:px-24 sm:px-20 xs:px-20 py-4 lg:py-4 md:py-4 sm:py-4 xs:py-4
+                 bg-black bg-opacity-50 mb-10 lg:mb-12 md:mb-12 sm:mb-12 xs:mb-12 text-white focus:border-none font-bold text-3xl
+                rounded-md shadow outline-none focus:outline-none ease-linear transition-all duration-150" type="button" (click)="toggleModal()">
+                    See Prices
+                </button>
+
+                <div *ngIf="showModal" class="font-mono overflow-x-hidden overflow-y-auto z-50 lg:w-2/3 md:w-2/3 sm:w-2/3 xs:w-2/3 mx-auto lg:mx-auto
+                h-90 lg:mt-56 md:mt-48 sm:mt-48 xs:mt-40 p-6 lg:p-6 md:p-6 sm:p-4 xs:p-4
+                outline-none bg-black bg-opacity-50
+                focus:outline-none text-white">
+                    <div class="max-w-3xl">
+                        <!--content-->
+                        <div class="border-0 rounded-lg w-full outline-none 
+                        focus:outline-none">
+                            <div class="flex price-list__header-container justify-between">
+                                <!--header-->
+                                <div class="text-white">
+                                    <h3 class="price-list__price-heading text-2xl">
+                                        Coffee Menu
+                                    </h3>
+                                </div>
+                                <!--close popup-->
+                                <div class="flex items-end justify-end">
+                                    <button class="h-10 ml-auto order-2 text-2xl outline-none text-white
+                                    focus:outline-none ease-linear transition-all duration-150" type="button" (click)="toggleModal()">
+                                    <i class="fa fa-window-close"></i>
+                                </button>
+                                </div>
+                            </div>
+                            <!-- data -->
+                            <div *ngIf="coffee$" class="pt-6 lg:pt-6 md:pt-6 sm:pt-6 xs:pt-6">
+                                <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-4 ">
+                                    <div *ngFor="let cp of coffee " class="text-white capitalize text-lg border-2 border-white rounded-lg">
+                                        <h4 class="text-center xs:break-all md:break-all sm:break-all lg:break-all text-xl font-bold">{{cp.drink_name}}</h4>
+                                        <ng-container *ngFor="let size of cp.prices | keyvalue:returnZero">
+                                            <h3 class="text-center"><span>{{size.key}} :</span> &euro;<span>{{size.value}}</span></h3>
+                                        </ng-container>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ng-container>
+</header>

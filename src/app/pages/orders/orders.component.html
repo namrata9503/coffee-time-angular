@@ -1,0 +1,18 @@
+<section>
+    <app-navbar></app-navbar>
+    <ng-container *ngIf="orders$ | async as orders">
+        <div class="bg-header-background bg-cover bg-no-repeat bg-top min-h-screen -mt-36 lg:-mt-36 md:-mt-36 sm:-mt-36 xs:-mt-16">
+            <div *ngIf="orders$ " class=" font-mono pt-64 lg:pt-56 md:pt-56 sm:pt-56 xs:pt-36
+            grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12 mx-10 lg:mx-10 md:mx-10 sm:mx-10 xs:mx-10">
+                <div *ngFor="let order of orders">
+                    <div class="text-white bg-black bg-opacity-50 p-8 lg:p-8 md:p-8 sm:p-8 xs:p-8 rounded-lg">
+                        <p><i class="fa fa-user"></i> <span class="p-4 lg:p-4 md:p-4 sm:p-4 xs:p-4 capitalize text-lg">{{order.user}}</span> </p>
+                        <p><i class="fa fa-coffee"></i> <span class="p-14 lg:p-4 md:p-4 sm:p-4 xs:p-4 capitalize text-lg">{{order.drink}}-{{order.size }}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </ng-container>
+</section>

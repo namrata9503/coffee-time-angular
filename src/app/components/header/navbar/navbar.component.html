@@ -1,0 +1,35 @@
+<nav class="lg:w-9/12 sm:w-full relative flex flex-wrap mt-12 h-20 lg:h-20 lg:mx-auto lg:mt-16 md:mt-16 sm:mt-16 items-center justify-evenly bg-black bg-opacity-50 xs:bg-black">
+    <div class="container flex flex-wrap items-center justify-between  p-8 ">
+        <div class="w-full flex flex-col lg:flex-row">
+            <div class="relative flex justify-between lg:w-auto px-4 lg:justify-start">
+                <a [routerLink]="['/']" class="inline-block -mt-32 lg:-mt-32 md:-mt-32 sm:-mt-32 ml-8 lg:ml-8 md:ml-8 sm:ml-8 xs:ml-8">
+                    <img src="../../../../assets/circle-logo.png" class="relative w-2/5 lg:w-3/4 md:w-2/5 sm:w-2/5 xs:w-2/5 h-80 lg:h-80 md:h-80 sm:h-80 xs:h-40 
+                     xs:z-50 sm:z-50 md:z-50
+                    object-contain lg:object-scale-down" alt="Logo">
+                </a>
+                <button class="w-2/5 -mt-32 md:-mt-32 sm:-mt-32 xs:-mt-24 text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded block lg:hidden outline-none focus:outline-none" type="button" (click)="toggleNavbar()">
+                   <span *ngIf="!showMenu"><i class="fa fa-bars"></i></span>
+                   <span *ngIf="showMenu"><i class="fa fa-window-close"></i></span>
+                </button>
+            </div>
+
+            <div [ngClass]="{'hidden': !showMenu, 'flex': showMenu}" class="lg:flex lg:flex-grow lg:mt-0 md:-mt-28 sm:-mt-28 xs:-mt-22">
+                <ul class="flex flex-col lg:flex-row list-none md:w-full sm:w-full xs:w-full lg:pt-0 md:pt-20 sm:pt-20 xs:pt-20 px-20 md:px-20 sm:px-20 xs:px-20 
+                lg:bg-transparent md:bg-black sm:bg-black xs:bg-black md:bg-opacity-60 sm:bg-opacity-60 xs:bg-opacity-60
+                 text-white md:z-30 sm:z-30 xs:z-30 font-mono">
+                    <li class="nav-item pt-5 lg:pt-5 lg:px-20 md:p-12 sm:p-12 xs:p-12 text-2xl  rounded">
+                        <a [routerLink]="['/users']" class=" flex items-center uppercase font-bold leading-snug text-white">
+                            <p class="text-lg leading-lg text-white opacity-75"></p><span>Users</span>
+                        </a>
+                    </li>
+                    <li class="nav-item pt-5 lg:pt-5 lg:px-20 md:p-12 sm:p-12 xs:p-12 text-2xl  rounded">
+                        <a [routerLink]="['/orders']" class=" flex items-center uppercase font-bold leading-snug text-white">
+                            <p class="text-lg leading-lg text-white opacity-75"></p><span>Orders</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
