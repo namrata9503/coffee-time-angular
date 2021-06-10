@@ -12,7 +12,7 @@ export class CoffeePriceService {
 
     constructor(private http: HttpClient) { }
 
-    /* get all countries from API */
+    /* get all coffee prices from API */
     getAllPrices(): Observable<any> {
         return this.http.get<Coffee[]>(
             `${this.apiURL}/prices`,

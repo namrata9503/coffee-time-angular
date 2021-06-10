@@ -16,7 +16,7 @@ export class OrdersComponent implements OnInit {
     ngOnInit(): void {
         this.getOrders();
     }
-    /* get all orders from orders.service and sorts it by ascending users */
+    /* get all orders from orders.service  */
     getOrders(): void {
         this.orders$ = this.orderService.getAllOrders();
     }

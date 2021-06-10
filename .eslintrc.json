@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "overrides": [
+    {
+      "files": [
+        "*.html",
+        "*.ts",
+        "*.js"
+      ],
+      "parserOptions": {
+        "parser": "babel-eslint",
+        "project": [
+          "tsconfig.app.json"
+        ],
+        "createDefaultProgram": true
+      }
+    }
+  ],
+  "extends": [
+    "@pxlwidgets/eslint-config"
+    ],
+  "rules": {
+    "no-param-reassign": 0,
+    "eqeqeq": 0,
+    "global-require": 0
+  },
+  "settings": {
+    "import/core-modules": ["rxjs/operators"]
+ }
+}
