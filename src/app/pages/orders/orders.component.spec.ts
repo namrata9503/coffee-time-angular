@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { OrdersComponent } from './orders.component';
@@ -26,8 +26,13 @@ describe('OrdersComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-    // it('should have h1', () => {
-    //     const h1 = fixture.debugElement.nativeElement.querySelector('h1');
-    //     expect(h1).toBeTruthy();
-    // });
+
+    it('check whether getOrders() is called and observable value checks', async(() => {
+        spyOn(component, 'getOrders').and.callThrough();
+        component.ngOnInit();
+        fixture.detectChanges();
+        expect(component.getOrders).toBeTruthy();
+        expect(component.getOrders).toHaveBeenCalled();
+        expect(component.orders$).not.toBeNull();
+    }));
 });

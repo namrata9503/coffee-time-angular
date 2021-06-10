@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { Orders } from '@model/orders';
@@ -12,18 +11,16 @@ import { UserDetailsService } from '@services/users-details.service';
     styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+    Math: any;
     orders$?: Observable<Orders[]>;
     users$?: Observable<Users[]>;
     data?: Users;
-    constructor(private userDetailService: UserDetailsService,
-        private route: ActivatedRoute,
-        private router: Router) { }
+    constructor(private userDetailService: UserDetailsService) {
+        this.Math = Math;
+    }
 
     ngOnInit(): void {
         this.getUsers();
-        this.route.params.subscribe((routeParams) => {
-            console.log('param: ', routeParams);
-        });
     }
 
     /* get  users from users.service  */
@@ -32,12 +29,14 @@ export class UsersComponent implements OnInit {
     }
     /* get user details by name */
     getDetails(user: Users): void {
-        this.userDetailService
-            .getUserDetails(user)
+        this.userDetailService.getUserDetails(user)
             .subscribe((data) => {
                 this.data = data;
-                console.log('name : ', user, data);
             });
-
     }
+
+    compare(creditscore: any, iterator: number) {
+        return creditscore > iterator;
+    }
+
 }

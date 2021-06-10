@@ -69,7 +69,7 @@ describe('UserDetailsService', () => {
             expect(data.orders[0].user).toEqual('coach');
             expect(data.user).toEqual(mockUserDetail.user);
         });
-        const req = http.expectOne(`${service.apiURL}/userDetails?user=${mockUserDetail.user}`);
+        const req = http.expectOne(`${service.apiURL}/userdetails?user=${mockUserDetail.user}`);
         expect(req.request.method).toBe('GET');
         req.flush(mockUserDetail);
     }));

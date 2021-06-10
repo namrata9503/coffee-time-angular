@@ -3,19 +3,36 @@
     <ng-container *ngIf="users$ | async as users">
         <div class="bg-header-background bg-cover bg-no-repeat bg-top min-h-screen lg:-mt-36 md:-mt-36 sm:-mt-36 xs:-mt-16">
             <div *ngIf="users$" class="font-mono pt-64 lg:pt-64 md:pt-64 sm:pt-64 xs:pt-36 lg:pl-10 md:pl-10 sm:pl-10 xs:pl-10">
-                <div *ngFor="let user of users" class="cursor-pointer text-white">
-                    <a class="active:font-bold" (click)="getDetails(user)"><i class="fa fa-user"></i> <span class="lg:p-4 md:p-4 sm:p-4 xs:p-4 capitalize text-lg">{{user}}</span> </a>
+                <div *ngFor="let user of users" class="cursor-pointer text-white lg:pb-2 md:pb-2 sm:pb-2 xs:pb-2 ">
+                    <a class="active:font-bold" (click)="getDetails(user)"><i class="fa fa-user"></i> <span class="lg:m-4 md:m-4 sm:m-4 xs:m-4 capitalize text-lg">{{user}}</span> </a>
                 </div>
-                <div class="bg-black bg-opacity-50 text-white lg:-mt-48 md:-mt-48 sm:-mt-48 xs:-mt-48  lg:ml-32 md:ml-32 sm:ml-32 xs:ml-32 mr-8 md:mr-8 lg:mr-8 sm:mr-4 xs:mr-4
+                <div class="bg-black bg-opacity-50 text-white lg:-mt-64 md:-mt-64 sm:-mt-64 xs:-mt-64  lg:ml-32 md:ml-32 sm:ml-32 xs:ml-32 mr-8 md:mr-8 lg:mr-8 sm:mr-4 xs:mr-4
                     grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 gap-4">
                     <div class="capitalize text-lg">
                         <div *ngIf="data" class=" p-3 lg:p-3 md:p-3 sm:p-2 xs:p-1"><span class="font-bold">Name :</span> {{data?.user}}</div>
                         <div *ngIf="data" class=" p-3 lg:p-3 md:p-3 sm:p-2 xs:p-1"><span class="font-bold">Total Paid :</span> &euro;{{data?.totalPayedAmount}}</div>
                         <div *ngIf="data" class=" p-3 lg:p-3 md:p-3 sm:p-2 xs:p-1"><span class="font-bold">Cost of all Orders :</span> &euro;{{data?.costOfAllOrders}}</div>
-                        <div *ngIf="data" class=" p-3 lg:p-3 md:p-3 sm:p-2 xs:p-1"><span class="font-bold">Owed Money :</span> &euro;{{data?.owed}}</div>
-                        <div *ngIf="data" class=" p-3 lg:p-3 md:p-3 sm:p-2 xs:p-1"><span class="font-bold">Score :</span> {{data?.creditSafeScore}}&#37;</div>
+                        <ng-container *ngIf="compare(data?.owed, 0); then isOwed; else extraPay">
+                        </ng-container>
+                        <ng-template #isOwed>
+                            <div>
+                                <div *ngIf="data" class=" p-3 lg:p-3 md:p-3 sm:p-2 xs:p-1"><span class="font-bold">Owed Money :</span> &euro;{{data?.owed}}</div>
+                            </div>
+                        </ng-template>
+                        <ng-template #extraPay>
+                            <div>
+                                <div *ngIf="data" class=" p-3 lg:p-3 md:p-3 sm:p-2 xs:p-1"><span class="font-bold">Extra Paid :</span> &euro; {{Math.abs(data?.owed)}}</div>
+                            </div>
+                        </ng-template>
+                        <div *ngIf="data">
+                            <p class=" p-3 lg:p-3 md:p-3 sm:p-2 xs:p-1">
+                                Payment Score:
+                                <span *ngFor="let x of [].constructor(5); let i=index ">
+                                   <i value="x"  [ngClass]="compare(data?.creditSafeScore,i) ? 'fa fa-star' : 'fa fa-star-o'"></i> 
+                                </span>
+                            </p>
+                        </div>
                     </div>
-
                     <div *ngIf="data" class="capitalize text-lg p-3 lg:p-3 md:p-3 sm:p-3 xs:p-3 grid grid-cols-2 lg:grid-cols-2 gap-4"> <span class="font-bold">Orders:</span>
                         <div *ngFor="let user of data?.orders" class="border-2 border-white rounded-lg">
                             <p *ngIf="data" class="p-6 lg:p-6 md:p-6 sm:p-4 xs:p-4"><i class="fa fa-coffee"></i> <span><span class=" p-4 lg:p-4 md:p-4 sm:p-4 xs:p-4 break-all lg:break-all md:break-all sm:break-all xs:break-all">{{user.drink }}</span>-{{user.size }}</span>
@@ -23,7 +40,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </ng-container>
